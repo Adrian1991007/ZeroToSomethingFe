@@ -1,0 +1,73 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  # see https://yarnpkg.com/lang/en/docs/cli/cache/
+  YARN_CACHE_FOLDER: '$CI_PROJECT_DIR/cache/yarn'
+  # see https://on.cypress.io/caching
+  CYPRESS_CACHE_FOLDER: '$CI_PROJECT_DIR/cache/Cypress'
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - cache/yarn
+    - cache/Cypress
+    # we also cache "node_modules" folder because
+    # we need installed modules in the "e2e" job
+    - node_modules
+
+install:
+  image: cypress/base:16.18.1
+  stage: build
+  script:
+    - yarn --frozen-lockfile
+    - yarn cypress verify
+
+e2e:
+  image: cypress/base:16.18.1
+  stage: test
+  allow_failure: true
+  script:
+    # run Cypress e2e tests
+    # if you have set up Dashboard recording
+    # add --record and --parallel flags
+    # and make sure a secret environment variable CYPRESS_RECORD_KEY is set
+    - yarn start & wait-on http://localhost:3000
+    - yarn cypress run
+  artifacts:
+    paths:
+      - cypress/videos
+      - cypress/screenshots
+    expire_in: 1 day
+    when: always
+
+build:
+  image: node:latest
+  stage: build
+  # rules:
+  #   - if: $CI_PIPELINE_SOURCE == "push"  && $CI_COMMIT_BRANCH == "master"
+  script:
+    - yarn
+    - CI=false yarn build
+  artifacts:
+    untracked: false
+    expire_in: 30 days
+    paths:
+      - ./build
+
+deploy:
+  image: python:latest
+  stage: deploy
+  # rules:
+  #   - if: $CI_PIPELINE_SOURCE == "push"  && $CI_COMMIT_BRANCH == "master"
+
+  script:
+    - pip3 install awscli
+    - echo $AWS_REGION
+    - echo "$AWS_REGION"
+    - echo $S3_BUCKET
+    - echo "$S3_BUCKET"
+    - aws s3 cp --recursive ./build/ "$S3_BUCKET"
+    - aws cloudfront create-invalidation --distribution-id EF62QGDTDDHZW --paths "/*"
