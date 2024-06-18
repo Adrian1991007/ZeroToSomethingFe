@@ -1,0 +1,82 @@
+{
+  "name": "zerotosomethingfrontend",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@hookform/resolvers": "^2.9.10",
+    "@material-ui/core": "^5.0.0-beta.5",
+    "@material-ui/icons": "^4.11.3",
+    "@material-ui/styles": "^4.11.5",
+    "@mui/icons-material": "^5.10.16",
+    "@mui/material": "^5.10.16",
+    "@mui/x-date-pickers": "^5.0.13",
+    "@reduxjs/toolkit": "^1.8.6",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.0.1",
+    "@testing-library/user-event": "^14.1.0",
+    "axios": "^1.2.0",
+    "cypress": "^12.3.0",
+    "dayjs": "^1.11.7",
+    "framer-motion": "^6.2.9",
+    "jwt-decode": "^3.1.2",
+    "lint": "^0.8.19",
+    "material-ui": "^0.20.2",
+    "material-ui-image": "^3.3.2",
+    "material-ui-popup-state": "^5.0.4",
+    "qs": "^6.11.0",
+    "react": "^18.2.0",
+    "react-content-loader": "^6.2.0",
+    "react-country-flag": "^3.0.2",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.40.0",
+    "react-icons": "^3.0.0",
+    "react-intl": "^6.1.2",
+    "react-redux": "^8.0.4",
+    "react-router-dom": "6",
+    "react-scripts": "5.0.1",
+    "react-select-country-list": "^2.2.3",
+    "react-table": "^7.8.0",
+    "react-tag-input": "^6.8.1",
+    "redux-thunk": "^2.4.1",
+    "store2": "^2.14.2",
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src --ext .js"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "ZeroToSomething Front-End",
+  "main": "index.js",
+  "repository": "git@gitlab.com:zerotosomething/zts-front-end.git",
+  "author": "Daniel Adrian Gherasim <daniel.gherasim@student.usv.ro>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.30.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "prettier": "2.8.1"
+  }
+}
